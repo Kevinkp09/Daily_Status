@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "pages#index"
   get "/signup", to: "pages#signup"
+  resources :employees
 end
