@@ -1,0 +1,12 @@
+<h2>Signup</h2>
+<%= form_with model: @employee do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.label :email %>
+  <%= form.text_field :email %>
+  <%= form.label :password %>
+  <%= form.password_field :password%>
+  <%= form.submit "Signup"%>
+  <%= link_to "Login", root_path%>
+
+<% end %>
