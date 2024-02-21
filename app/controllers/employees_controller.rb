@@ -14,6 +14,7 @@ class EmployeesController < ApplicationController
   def create
     @employee = Employee.new(employee_params)
     if @employee.save
+      flash[:notice] = "Welcome to Daily Status App."
       redirect_to @employee
     else
       render 'new', status: 422
@@ -27,6 +28,7 @@ class EmployeesController < ApplicationController
   def update
     @employee = Employee.find(params[:id])
     if @employee.update(employee_params)
+      flash[:notice] = "Information successfully updated."
       redirect_to @employee
     else
       render 'edit', status: 422
@@ -36,6 +38,7 @@ class EmployeesController < ApplicationController
   def destroy
     @employee = Employee.find(params[:id])
     @employee.destroy
+    flash[:notice] = "Account deleted successfully"
     redirect_to employees_path
   end
 
