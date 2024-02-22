@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   get "/signup", to: "pages#signup"
   resources :statuses
   resources :employees
+  resources :tasks
 end

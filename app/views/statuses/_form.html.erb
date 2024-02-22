@@ -1,4 +1,10 @@
-
+<% if @status.errors.any?%>
+    <ul>
+        <% @status.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+    </ul>
+<% end %>
 <%= form_with(model: @status, local: true) do |f| %>
   <p>
     <%= f.label :github_pr_link %> <br>

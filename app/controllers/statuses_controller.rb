@@ -18,7 +18,7 @@ class StatusesController < ApplicationController
       flash[:notice] = "Status added successfully"
       redirect_to status_path(@status)
     else
-      render 'new'
+      render 'new', status: 422
     end
   end
   def edit
