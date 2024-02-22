@@ -1,7 +1,15 @@
 class Employee < ApplicationRecord
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, uniqueness: {case_sensitive: true}, length: {maximum:105}, format: {with: VALID_EMAIL_REGEX}
-  validates :password, presence: true
-  validates :name, presence: true
-  has_many :statuses
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+
+         enum role: [:employee, :admin]
+         after_initialize :set_default_role, if: :new_record?
+
+         private
+         def set_default_role
+           self.role ||= :employee
+         end
+
 end
