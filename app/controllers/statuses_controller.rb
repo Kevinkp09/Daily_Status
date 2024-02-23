@@ -1,6 +1,6 @@
 class StatusesController < ApplicationController
   def index
-    @statuses = Status.all
+    @statuses = current_user.statuses
   end
 
   def show
@@ -13,7 +13,7 @@ class StatusesController < ApplicationController
 
   def create
     @status = Status.new(status_params)
-    @status.employee = Employee.first
+    @status.user = current_user
     if @status.save
       flash[:notice] = "Status added successfully"
       redirect_to status_path(@status)
@@ -21,6 +21,7 @@ class StatusesController < ApplicationController
       render 'new', status: 422
     end
   end
+
   def edit
     @status = Status.find(params[:id])
   end
@@ -28,25 +29,15 @@ class StatusesController < ApplicationController
   def update
     @status = Status.find(params[:id])
     if @status.update(status_params)
-      flash[:notice] = "Status updated successfully"
-      redirect_to @status
+       redirect_to status_path
+       flash[:notice] = "Status updated successfully"
     else
       render 'edit', status: 422
     end
   end
 
-  def destroy
-    @status = Status.find(params[:id])
-    @status.destroy
-    flash[:notice] = "Status deleted successfully"
-    redirect_to status_path
-  end
-
   private
 
-  def employee?
-    current_user.role == "employee"
-  end
   def status_params
     params.require(:status).permit(:github_pr_link, :date, :remarks)
   end
