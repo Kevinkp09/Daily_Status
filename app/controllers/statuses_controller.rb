@@ -43,6 +43,10 @@ class StatusesController < ApplicationController
   end
 
   private
+
+  def employee?
+    current_user.role == "employee"
+  end
   def status_params
     params.require(:status).permit(:github_pr_link, :date, :remarks)
   end
