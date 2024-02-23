@@ -1,0 +1,7 @@
+<h1>Status: <%= @status.id %></h1>
+<p>Github PR:<%= @status.github_pr_link %></p>
+<p>Date:<%= @status.date %></p>
+<p>Remarks:<%= @status.remarks %></p>
+<p><%= link_to 'Edit', edit_status_path(@status) %></p>
+
+<p><%= link_to 'Return back', statuses_path %></p>

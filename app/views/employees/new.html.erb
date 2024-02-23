@@ -1,3 +1,10 @@
 <h1>New employee</h1>
+<% if @employee.errors.any?%>
+    <ul>
+        <% @employee.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+    </ul>
+<% end %>
 <%= render 'form' %>
 <%= link_to 'Return to employees', employees_path %>

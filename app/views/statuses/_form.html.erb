@@ -1,0 +1,18 @@
+
+<%= form_with(model: @status, local: true) do |f| %>
+  <p>
+    <%= f.label :github_pr_link %> <br>
+    <%= f.text_field :github_pr_link %>        
+  </p>
+  <p>
+    <%= f.label :Date %> <br>
+    <%= f.datetime_local_field :date %> 
+  </p>
+  <p>
+    <%= f.label :Remarks %> <br>
+    <%= f.text_area :remarks %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
