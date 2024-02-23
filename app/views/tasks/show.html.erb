@@ -1,0 +1,9 @@
+<h2>Showing Task</h2>
+<p>Start Time: <%= @task.start_time %></p>
+<p>End Time:<%= @task.end_time %></p>
+<p>Title:<%= @task.title %></p>
+<p>Description:<%= @task.description %></p>
+ <%= image_tag url_for(@task.screenshot) if @task.screenshot.attached? %> 
+<p><%= link_to 'Edit', edit_task_path(@task) %></p>
+
+<p><%= link_to 'Return back', tasks_path %></p>
