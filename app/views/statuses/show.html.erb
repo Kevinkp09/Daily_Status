@@ -3,7 +3,8 @@
 <p>Date:<%= @status.date %></p>
 <p>Remarks:<%= @status.remarks %></p>
 <p><%= link_to 'Edit', edit_status_path(@status) %></p>
-
+<br>
+<hr>
     <h2>Showing Tasks</h2>
 <% @status.tasks.each do |task| %>
     <div>
@@ -11,11 +12,11 @@
     <p>End Time:<%= task.end_time %></p>
     <p>Title:<%= task.title %></p>
     <p>Description:<%= task.description %></p>
-
     <p>Screenshot of Output
         <%= image_tag task.screenshot, style: "max-width: 100px; max-height: 100px;" if task.screenshot.attached? %>
     </p>
     </div>
+    <hr>
 <% end %>
 
 <p><%= link_to 'Return back', statuses_path %></p>

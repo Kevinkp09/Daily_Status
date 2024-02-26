@@ -15,8 +15,8 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-      flash[:notice] = "Task successfully created"
       redirect_to @task
+      flash[:notice] = "Task successfully created"
     else
       render 'new', status: 422
     end
