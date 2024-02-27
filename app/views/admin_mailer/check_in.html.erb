@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Check In Notification</title>
+</head>
+<body>
+    <h2>Employee Check In Notification</h2>
+    <p>Hello Admin</p>
+        <% indian_time = Time.current.in_time_zone('Asia/Kolkata')%>
+        <p><%= @user.name %> has checked in at <%= indian_time.strftime('%d-%m-%Y, %I:%M:%S %p')%></p>
+</body>
+</html>

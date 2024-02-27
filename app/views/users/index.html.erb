@@ -2,4 +2,5 @@
 
 
 <%= link_to "Show Profile", user_path(current_user)%>
+<%= link_to "Check Out", checkouts_path, data: {turbo_method: :post}%>
 <%= link_to "Logout", destroy_user_session_path, data: {turbo_method: :delete, turbo_message: "Are you sure?"}%>
