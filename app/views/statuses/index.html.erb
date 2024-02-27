@@ -16,7 +16,7 @@
         <td><%= status.date %></td>
         <td><%= status.remarks %></td>
         <td><%= link_to "Show", status%></td>
-        <% if current_user.admin? %>
+        <% if admin? %>
           <td><%= link_to 'Add remarks', edit_status_path(status) %></td>
         <% else %>
           <td><%= link_to 'Edit', edit_status_path(status) %></td>
