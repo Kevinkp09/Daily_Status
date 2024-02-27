@@ -6,6 +6,7 @@
     </ul>
 <% end %>
 <%= form_with(model: @status, local: true) do |f| %>
+<% unless current_user.admin? %>
   <p>
     <%= f.label :github_pr_link %> <br>
     <%= f.text_field :github_pr_link %>        
@@ -14,10 +15,12 @@
     <%= f.label :Date %> <br>
     <%= f.datetime_local_field :date %> 
   </p>
+  <% else %>
   <p>
     <%= f.label :Remarks %> <br>
     <%= f.text_area :remarks %>
   </p>
+  <% end %>
   <p>
     <%= f.submit %>
   </p>
