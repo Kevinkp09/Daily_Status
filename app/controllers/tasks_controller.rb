@@ -8,14 +8,15 @@ class TasksController < ApplicationController
   end
 
   def new
+    @status = Status.find(params["status_id"].to_i)
     @task = Task.new
   end
 
   def create
     @task = Task.new(task_params)
     if @task.save
-      redirect_to @task
       flash[:notice] = "Task successfully created"
+      redirect_to @task
     else
       render 'new', status: 422
     end
@@ -43,6 +44,7 @@ class TasksController < ApplicationController
   end
 
   private
+
   def task_params
     params.require(:task).permit(:start_time, :end_time, :title, :description, :screenshot, :status_id)
   end

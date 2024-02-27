@@ -1,6 +1,10 @@
 class StatusesController < ApplicationController
   def index
-    @statuses = current_user.statuses
+    if current_user.admin?
+      @statuses = Status.all
+    else
+      @statuses = current_user.statuses
+    end
   end
 
   def show
