@@ -19,6 +19,7 @@ class StatusesController < ApplicationController
     @status = Status.new(status_params)
     @status.user = current_user
     if @status.save
+      AdminMailer.new_status(current_user, @status).deliver_now
       flash[:notice] = "Status added successfully"
       redirect_to status_path(@status)
     else
