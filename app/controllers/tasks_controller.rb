@@ -13,7 +13,10 @@ class TasksController < ApplicationController
   end
 
   def create
+    @status = Status.find(params[:task][:status_id].to_i)
     @task = Task.new(task_params)
+
+
     if @task.save
       flash[:notice] = "Task successfully created"
       redirect_to task_path(@task)
