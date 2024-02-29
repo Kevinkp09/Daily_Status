@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   resources :statuses
   resources :tasks
   resources :users
-
+  resources :remarks, only: [:create]
+  post '/resolve', to: 'remarks#resolve'
   post '/checkouts', to: 'checkouts#process_check_outs'
   post '/new_status_email', to: 'statusess#send_email'
 end

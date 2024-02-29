@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_23_115630) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_28_114038) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -53,13 +53,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_23_115630) do
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
+  create_table "remarks", force: :cascade do |t|
+    t.text "content"
+    t.integer "status_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["status_id"], name: "index_remarks_on_status_id"
+  end
+
   create_table "statuses", force: :cascade do |t|
     t.string "github_pr_link"
     t.date "date"
-    t.text "remarks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.text "remarks"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -89,4 +97,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_23_115630) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "remarks", "statuses"
 end

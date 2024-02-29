@@ -3,6 +3,9 @@
 <table>
   <thead>
     <tr>
+      <% if admin? %>
+        <th>Employee Name:</th>
+      <% end %>
       <th>Github PR</th>
       <th>Date</th>
       <th>Remarks</th>
@@ -12,6 +15,9 @@
   <tbody>
     <% @statuses.each do |status| %>
       <tr>
+        <% if admin? && status.user.present? %>
+          <td><%= link_to status.user.name, user_path(status.user)  %></td>
+        <% end %>
         <td><%= link_to "Github PR",status.github_pr_link  %></td>
         <td><%= status.date %></td>
         <td><%= status.remarks %></td>
