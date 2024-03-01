@@ -1,16 +1,17 @@
-<h1>Edit</h1>
-<%= form_with model: @user do |form| %>
-  <div>
-    <%= form.label :email %><br>
-    <%= form.text_field :email %>
-  </div>
+<div class="bg-[#C1DFFF] w-full h-screen flex justify-center item-center">
+  
+  <%= form_with model: @user do |form| %>
+    <div class="mb-4 mt-24">
+      <%= form.text_field :email, placeholder: "Email", class: "block text-[#112A46] text-md font-bold mb-2 rounded-lg text-center" %>
+    </div>
 
-  <div>
-    <%= form.label :password %><br>
-    <%= form.text_area :password %><br>
-  </div>
+    <div>
+      <%= form.text_field :password, placeholder: "Password" , class: "block text-[#112A46] text-md font-bold mb-2 rounded-lg text-center" %><br>
+    </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+    <div class="mb-4">
+      <%= form.submit "Update Profile", class: "bg-[#112A46] text-[#F5F5F5] font-bold py-2 px-4 rounded  hover:bg-[#F5F5F5] hover:text-[#112A46] ml-8"  %>
+    </div>
+    <%= link_to "Back to profile", user_path, class: " ml-24 hover:text-blue-500 underline md:decoration-solid"%>
+  <% end %>
+</div>

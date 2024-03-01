@@ -5,7 +5,8 @@
         <% end %>
     </ul>
 <% end %>
-<%= form_with(model: @status, local: true) do |f| %>
+
+<%= form_with(model: @status, local: true) do |f|%>
 <% unless current_user.admin? %>
   <p>
     <%= f.label :github_pr_link %> <br>

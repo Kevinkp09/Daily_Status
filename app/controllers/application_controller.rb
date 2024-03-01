@@ -11,6 +11,6 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     @current_user = resource
     AdminMailer.check_in(resource).deliver_now
-    user_path(@user)
+    statuses_path(@user)
   end
 end

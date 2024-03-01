@@ -1,10 +1,20 @@
-<h1>Name of User: <%= @user.name %></h1>
-<p>Email: <%= @user.email %></p>
-<br>
-<%= link_to "Edit Profile", edit_user_path(current_user)%>
-<br>
-<%= link_to "Logout", destroy_user_session_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
-<br>
-<%= link_to "Status Dashboard", statuses_path%>
-<br>
-<%= link_to "Check Out", checkouts_path, data: {turbo_method: :post}%>
+<div class="w-full bg-[#112A46] text-[#F5F5F5] p-6  shadow-md h-screen">
+  <h1 class="text-3xl font-bold mb-4 text-center"> <%= @user.name.capitalize %></h1>
+
+  <div class="mb-4 text-center">
+    <%= link_to "Edit Profile", edit_user_path(current_user), class: "text-blue-500 hover:underline ml-12" %>
+    <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-red-500 hover:underline ml-12" %>
+    <%= link_to "Status Dashboard", statuses_path, class: "text-green-500 hover:underline ml-12" %>
+    <%= link_to "Check Out", checkouts_path, data: { turbo_method: :post }, class: "text-yellow-500 hover:underline ml-12" %>
+  </div>
+
+  <h2 class="text-xl font-bold mb-2 text-center">Uploaded Statuses:</h2>
+  <ul>
+    <% @user.statuses.each do |status| %>
+      <li class="mb-4 text-center">
+        <%= link_to "Status #{status.id}", status_path(status), class: "text-blue-500 hover:underline" %>
+        <span class="text-gray-500"> - <%= status.date %></span>
+      </li>
+    <% end %>
+  </ul>
+</div>

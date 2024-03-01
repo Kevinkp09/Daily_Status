@@ -1,33 +1,47 @@
-<h1>All Statuses</h1>
+<div class="w-full h-24 bg-[#112A46] text-[#F5F5F5] tracking-tighter">
+  <%= link_to user_path(current_user), class: "absolute left-[85%] mt-8 text-4xl" do %>
+    <%= current_user.name %>
+  <% end %>
+  <%= link_to user_path(current_user), class: "mt-8 text-4xl" do %>
+    <i class="fa-solid fa-circle-user mx-[168vh] mr-12 mt-[2.6%]"></i>
+  <% end %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Github PR</th>
-      <th>Date</th>
-      <th>Remarks</th>
-      <th colspan=3>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @statuses.each do |status| %>
+<div class="bg-[#C1DFFF] w-full h-screen ">
+  <% unless admin? %>
+    <%= link_to "New Status", new_status_path, class: "bg-[#112A46] mb-10 text-[#F5F5F5] w-32 rounded-lg p-3 absolute left-[45%] top-48 h-12 hover:bg-[#F5F5F5] hover:text-[#112A46] text-center"%>
+  <% end %>
+  <table class="border-spacing-1 bottom-16 w-full absolute">
+    <thead>
       <tr>
-        <td><%= link_to "Github PR",status.github_pr_link  %></td>
-        <td><%= status.date %></td>
-        <td><%= status.remarks %></td>
-        <td><%= link_to "Show", status%></td>
         <% if admin? %>
-          <td><%= link_to 'Add remarks', edit_status_path(status) %></td>
-        <% else %>
-          <td><%= link_to 'Edit', edit_status_path(status) %></td>
+          <th class="border border-slate-600">Employee</th>
         <% end %>
+        <th class="border border-slate-600">Github PR</th>
+        <th class="border border-slate-600">Date</th>
+        <th class="border border-slate-600">Remarks</th>
+        <th colspan=2 class="border border-slate-600">Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
-
-<%= link_to "New Status", new_status_path%>
-<br>
-<%= link_to "Your profile", user_path(current_user)%>
+    </thead>
+    <tbody class="border border-slate-600">
+      <% @statuses.each do |status| %>
+        <tr class="border border-slate-600" >
+           <% if admin? && status.user %>
+                <td class="border border-slate-600"><%= link_to "#{status.user.name}",status.user, class: "hover:text-blue-500 underline md:decoration-solid"  %></td>
+           <% end %>
+          <td class="border border-slate-600"><%= link_to "Github PR",status.github_pr_link, class: "hover:text-blue-500 underline md:decoration-solid"  %></td>
+          <td class="border border-slate-600"><%= status.date %></td>
+          <td class="border border-slate-600"><%= status.remarks %></td>
+          <td><%= link_to "Show", status, class: "hover:text-blue-500 underline md:decoration-solid"%></td>
+          <% if admin? %>
+            <td><%= link_to 'Add remarks', edit_status_path(status), class: "hover:text-blue-500 underline md:decoration-solid" %></td>
+          <% else %>
+            <td><%= link_to 'Edit', edit_status_path(status), class: "hover:text-blue-500 underline md:decoration-solid" %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+</div>
 
