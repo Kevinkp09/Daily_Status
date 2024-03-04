@@ -1,28 +1,34 @@
-<% if @status.errors.any?%>
-    <ul>
-        <% @status.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-        <% end %>
-    </ul>
+<% if @status.errors.any? %>
+  <ul>
+    <% @status.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
 <% end %>
 
-<%= form_with(model: @status, local: true) do |f|%>
-<% unless current_user.admin? %>
-  <p>
-    <%= f.label :github_pr_link %> <br>
-    <%= f.text_field :github_pr_link %>        
-  </p>
-  <p>
-    <%= f.label :Date %> <br>
-    <%= f.datetime_local_field :date %> 
-  </p>
-  <% else %>
-  <p>
-    <%= f.label :Remarks %> <br>
-    <%= f.text_area :remarks %>
-  </p>
+<div class="bg-[#C1DFFF] w-full h-screen flex justify-center item-center">
+  <%= form_with(model: @status, :html => { :style => 'display:flex; justify-content: center; align-items: center; flex-direction: column;' }, local: true) do |f| %>
+    <% unless current_user.admin? %>
+      <div class="mb-4">
+        <%= f.text_field :github_pr_link, placeholder: "Github PR link", class: "block text-[#112A46] text-md font-bold mb-2 rounded-lg text-center" %>        
+      </div>
+      <div>
+        <%= f.datetime_local_field :date, class:"rounded-lg" %> 
+      </div>
+    <% else %>
+      <div>
+        <%= f.text_area :remarks, placeholder: "Remarks", class: "block text-[#112A46] text-md font-bold mb-2 rounded-lg text-center" %>
+      </div>
+    <% end %>
+
+    <% if current_user.admin? %>
+      <%= f.simple_fields_for :address do |address| %>
+        <%= render partial: 'shared/address/form', locals: {f: address} %>
+      <% end %>
+    <% end %>
+
+    <div class="mt-4">
+      <%= f.submit (@status.new_record? ? "Create Status" : "Edit Status"), class: "bg-[#112A46] text-[#F5F5F5] font-bold py-2 px-4 rounded  hover:bg-[#F5F5F5] hover:text-[#112A46] ml-2" %>
+    </div>
   <% end %>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+</div>

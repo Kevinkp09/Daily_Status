@@ -5,32 +5,33 @@
         <% end %>
     </ul>
 <% end %>
-<%= form_with(model: @task, local: true) do |f| %>
-  <p>
-    <%= f.label :start_time %> <br>
-    <%= f.datetime_local_field :start_time%>        
-  </p>
-  <p>
-    <%= f.label :end_time %> <br>
-    <%= f.datetime_local_field :end_time %> 
-  </p>
-    <p>
-    <%= f.hidden_field :status_id, value: @status.id %> 
-  </p>
-  <p>
-    <%= f.label :title %> <br>
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :description %> <br>
-    <%= f.text_area :description %>
-  </p>  
-
-    <p>
-        <%= f.label :screenshot %> <br>
-        <%= f.file_field :screenshot %>
-    </p>  
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+<div class="bg-[#C1DFFF] w-full h-screen flex justify-center item-center">
+  <%= form_with(model: @task, :html => { :style => 'display:flex; justify-content: center; align-items: center; flex-direction: column;' }, local: true) do |f| %>
+  <% unless current_user.admin? %>
+      <div class="mb-4 mt-12">
+        <%= f.label :start_time %> <br>
+        <%= f.datetime_local_field :start_time, class: "rounded-lg"%>        
+      </div>
+      <div>
+        <%= f.label :end_time %> <br>
+        <%= f.datetime_local_field :end_time, class: "rounded-lg" %> 
+      </div>
+      <div>
+        <%= f.hidden_field :status_id, value: @status.id %> 
+      </div>
+      <div>
+        <%= f.text_field :title, placeholder: "Title" , class: "block text-[#112A46] text-md font-bold mb-2 rounded-lg text-center mt-4" %>
+      </div>
+      <div>
+        <%= f.text_area :description, rows: 5, cols: 50, placeholder: "Description" , class: "block text-[#112A46] text-md font-bold mb-4 rounded-lg text-center mt-4" %>
+      </div>  
+        <div class="ml-12">
+            <%= f.label :screenshot %> <br>
+            <%= f.file_field :screenshot, class: "block text-[#112A46] text-md mb-4 rounded-lg" %>
+        </div>  
+      <div class="mt-2">
+        <%= f.submit (@task.new_record? ? "Create Task" : "Edit Task") , class: "bg-[#112A46] text-[#F5F5F5] font-bold py-2 px-4 rounded-md  hover:bg-[#F5F5F5] hover:text-[#112A46] ml-8" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
