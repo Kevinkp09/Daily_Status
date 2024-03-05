@@ -8,25 +8,22 @@
 
 <div class="bg-[#C1DFFF] w-full h-screen flex justify-center item-center">
   <%= form_with(model: @status, :html => { :style => 'display:flex; justify-content: center; align-items: center; flex-direction: column;' }, local: true) do |f| %>
-    <% unless current_user.admin? %>
+    <% unless admin? %>
       <div class="mb-4">
         <%= f.text_field :github_pr_link, placeholder: "Github PR link", class: "block text-[#112A46] text-md font-bold mb-2 rounded-lg text-center" %>        
       </div>
       <div>
         <%= f.datetime_local_field :date, class:"rounded-lg" %> 
       </div>
-    <% else %>
+    <% end %>
       <div>
-        <%= f.text_area :remarks, placeholder: "Remarks", class: "block text-[#112A46] text-md font-bold mb-2 rounded-lg text-center" %>
+          <% if admin? %>
+            <%= f.fields_for :remarks do |builder| %>
+              <%= builder.label :description%>
+              <%= builder.text_field :description, placeholder: "Remark Description", class: "block text-[#112A46] text-md font-bold mb-2 rounded-lg text-center" %>
+            <% end %>
+          <% end %>
       </div>
-    <% end %>
-
-    <% if current_user.admin? %>
-      <%= f.simple_fields_for :address do |address| %>
-        <%= render partial: 'shared/address/form', locals: {f: address} %>
-      <% end %>
-    <% end %>
-
     <div class="mt-4">
       <%= f.submit (@status.new_record? ? "Create Status" : "Edit Status"), class: "bg-[#112A46] text-[#F5F5F5] font-bold py-2 px-4 rounded  hover:bg-[#F5F5F5] hover:text-[#112A46] ml-2" %>
     </div>

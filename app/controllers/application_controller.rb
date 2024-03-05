@@ -9,8 +9,12 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    @current_user = resource
-    AdminMailer.check_in(resource).deliver_now
-    @user
+    unless current_user.admin?
+        @current_user = resource
+        AdminMailer.check_in(resource).deliver_now
+        @user
+    else
+      statuses_path
+    end
   end
 end
