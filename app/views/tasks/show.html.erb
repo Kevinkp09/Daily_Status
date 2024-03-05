@@ -1,8 +1,11 @@
-<div>
-    <h2>Task</h2>
-   <p>Start Time:<%= @task.start_time %></p> 
-   <p>End Time:<%= @task.end_time %></p>
-   <p>Title:<%= @task.title %></p>
-   <p>Description:<%= @task.description %></p>
-   <p>Screenshot:<%= image_tag @task.screenshot, style: "max-width: 100px; max-height: 100px;" %></p>
+<%= render 'statuses/navigation' %>
+
+<div class="text-center bg-[#C1DFFF] w-full h-screen">
+    <h2 class="text-3xl pt-8  ">Task</h2>
+    <p class="mb-8 mt-8 tracking-wide text-xl">Start Time:<%= @task.start_time %></p> 
+    <p class="mb-8 tracking-wide text-xl">End Time:<%= @task.end_time %></p>
+    <p class="mb-8 tracking-wide text-xl">Title:<%= @task.title %></p>
+    <p class="mb-8 tracking-wide text-xl">Description:<%= @task.description %></p>
+    <p class="mb-8 tracking-wide text-xl">Screenshot:<%= image_tag @task.screenshot, style: "width: 30%; margin-left: auto; margin-right: auto; display: block; " %></p>
+    <%= link_to "Go Back", @task.status, class: "hover:text-blue-500 underline md:decoration-solid text-xl"%>
 </div>

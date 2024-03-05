@@ -1,26 +1,23 @@
-<h2>Log in</h2>
-
+<div class="flex item w-full h-full">
+  <div class="w-[75%] h-screen flex flex-col">
+    <img class="h-full"  src="https://img.freepik.com/free-vector/businessman-holding-pencil-big-complete-checklist-with-tick-marks_1150-35019.jpg?w=1800&t=st=1709199557~exp=1709200157~hmac=d45f1aaa2b230e4d0112908ab9bd6eca3432848ae7065a22c54aeb03aa9a4d7e">
+  </div>
+  <div class="h-screen flex flex-col bg-[#C1DFFF] w-[25%]">
+  <div class="mt-24 text-center">
+<h2 class="text-center mt-5 mb-24 text-[#112A46] text-5xl">Log in</h2>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  <div class="space-y-7 text-lg">
+   
+    <%= f.email_field :email, autofocus: true, placeholder: "Email", autocomplete: "email", class: "rounded-lg bg-[#F5F5F5] p-[1.5px] placeholder-[#112A46] w-[67%]" %>
+    <%= f.password_field :password, autocomplete: "current-password",placeholder: "Password", class: "rounded-lg bg-[#F5F5F5] p-[1.5px] placeholder-[#112A46] w-[67%]" %>
+</div>
+<div class="space-y-7"  >
+    <%= f.submit "Log in", class: "bg-[#112A46] text-[#F5F5F5] w-24 rounded-lg p-2 absolute left-[85%] bottom-48 h-10 hover:bg-[#F5F5F5] hover:text-[#112A46] " %>
   </div>
 <% end %>
 
 <%= render "users/shared/links" %>
+  </div>
+  </div>
+ </div>
+</div>

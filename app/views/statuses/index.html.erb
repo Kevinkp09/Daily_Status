@@ -1,33 +1,45 @@
-<h1>All Statuses</h1>
+<%= render 'navigation' %>
+<div class="bg-[#C1DFFF] w-full h-screen p-3">
+  <% unless admin? %>
+    <p class="m-[2rem] text-center">
+      <%= link_to "New Status", new_status_path, class: "bg-[#112A46] mb-10 text-[#F5F5F5] w-32 rounded-lg p-3 h-12 hover:bg-[#F5F5F5] hover:text-[#112A46] text-center" %>
+    </p>
+  <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Github PR</th>
-      <th>Date</th>
-      <th>Remarks</th>
-      <th colspan=3>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @statuses.each do |status| %>
-      <tr>
-        <td><%= link_to "Github PR",status.github_pr_link  %></td>
-        <td><%= status.date %></td>
-        <td><%= status.remarks %></td>
-        <td><%= link_to "Show", status%></td>
-        <% if admin? %>
-          <td><%= link_to 'Add remarks', edit_status_path(status) %></td>
-        <% else %>
-          <td><%= link_to 'Edit', edit_status_path(status) %></td>
+  <% if @statuses.present? %>
+    <table class="border-spacing-1 w-full mt-4">
+      <thead>
+        <tr>
+          <% if admin? %>
+            <th class="border border-slate-600">Employee</th>
+          <% end %>
+          <th class="border border-slate-600">Github PR</th>
+          <th class="border border-slate-600">Date</th>
+          <th class="border border-slate-600">Remarks</th>
+          <th colspan=2 class="border border-slate-600">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="border border-slate-600">
+        <% @statuses.each do |status| %>
+          <tr class="border border-slate-600">
+            <% if admin? && status.user %>
+              <td class="border border-slate-600"><%= link_to "#{status.user.name}", status.user, class: "hover:text-blue-500 underline md:decoration-solid" %></td>
+            <% end %>
+            <td class="border border-slate-600 text-center"><%= link_to "Github PR", status.github_pr_link, class: "hover:text-blue-500 underline md:decoration-solid" %></td>
+            <td class="border border-slate-600 text-center"><%= status.date %></td>
+            <td class="border border-slate-600"><%= status.remarks %></td>
+            <td class="text-center"><%= link_to '<i class="fa-solid fa-eye"></i>'.html_safe, status, class: "hover:text-blue-500 underline md:decoration-solid text-2xl" %></td>
+            <% if admin? %>
+              <td><%= link_to 'Add remarks', edit_status_path(status), class: "hover:text-blue-500 underline md:decoration-solid" %></td>
+            <% else %>
+              <td class="text-center"><%= link_to '<i class="fa-solid fa-pen-to-square"></i>'.html_safe, edit_status_path(status), class: "hover:text-blue-500 underline md:decoration-solid text-2xl" %></td>
+            <% end %>
+          </tr>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
-
-<%= link_to "New Status", new_status_path%>
-<br>
-<%= link_to "Your profile", user_path(current_user)%>
-
+      </tbody>
+    </table>
+  <% else %>
+    <p class="text-center">No statuses.</p>
+  <% end %>
+  <br>
+</div>
