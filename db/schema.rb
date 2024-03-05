@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_23_115630) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_04_115018) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,18 +39,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_23_115630) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "employees", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.string "name"
+  create_table "remarks", force: :cascade do |t|
+    t.string "description"
+    t.string "remarkable_type"
+    t.integer "remarkable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "role"
-    t.index ["email"], name: "index_employees_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
+    t.index ["remarkable_type", "remarkable_id"], name: "index_remarks_on_remarkable"
   end
 
   create_table "statuses", force: :cascade do |t|

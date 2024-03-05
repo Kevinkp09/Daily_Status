@@ -1,0 +1,11 @@
+<div class="w-full h-24 bg-[#112A46] text-[#F5F5F5] tracking-tighter">
+  <%= link_to user_path(current_user), class: "absolute left-[85%] mt-8 text-4xl hover:underline hover:scale-[108%]" do %>
+    <%= current_user.name.capitalize %>
+  <% end %>
+  <%= link_to user_path(current_user), class: "mt-8 text-4xl" do %>
+    <i class="fa-solid fa-circle-user mx-[168vh] mr-12 mt-[2.6%]"></i>
+  <% end %>
+  <p class="text-2xl"><%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "absolute top-8 text-[#F5F5F5] hover:underline ml-12 hover:bg-[#C1DFFF] hover:text-[#112A46] w-20 text-center rounded-md" %></p>
+  <p class="text-2xl"><%= link_to "Status Dashboard", statuses_path, class: "text-[#F5F5F5] hover:underline ml-36 absolute top-8 w-48 text-center rounded-md hover:bg-[#C1DFFF] hover:text-[#112A46]" %></p>
+  <p class="text-2xl"><%= link_to "Check Out", checkouts_path, data: { turbo_method: :post }, class: " absolute top-8 rounded-md w-28 text-center text-[#F5F5F5] hover:bg-[#C1DFFF] hover:text-[#112A46] hover:underline ml-[24%]" %></p>
+</div>

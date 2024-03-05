@@ -8,7 +8,12 @@ class StatusesController < ApplicationController
   end
 
   def show
+    unless current_user
+      flash[:notice] = "You are not authorized for this action"
+      redirect_to statuses_path
+    end
     @status = Status.find(params[:id])
+    @tasks = @status.tasks
   end
 
   def new
@@ -46,4 +51,5 @@ class StatusesController < ApplicationController
   def status_params
     params.require(:status).permit(:github_pr_link, :date, :remarks)
   end
+
 end
