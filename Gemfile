@@ -4,7 +4,6 @@ ruby "3.2.2"
 
 gem "devise"
 gem "pry-rails"
-gem 'simple_form'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3"
