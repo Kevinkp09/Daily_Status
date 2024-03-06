@@ -28,7 +28,7 @@
             <td class="border border-slate-600 text-center"><%= link_to "Github PR", status.github_pr_link, class: "hover:text-blue-500 underline md:decoration-solid" %></td>
             <td class="border border-slate-600 text-center"><%= status.date %></td>
             <td class="border border-slate-600">
-               <% status.remarks.last.each do |remark| %>
+               <% status.remarks.each do |remark| %>
                   <p>Remark: <%= remark.description %></p>
                <% end %>
             </td>
