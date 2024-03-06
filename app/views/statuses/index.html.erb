@@ -16,7 +16,7 @@
           <th class="border border-slate-600">Github PR</th>
           <th class="border border-slate-600">Date</th>
           <th class="border border-slate-600">Remarks</th>
-          <th colspan=2 class="border border-slate-600">Actions</th>
+          <th colspan=3 class="border border-slate-600">Actions</th>
         </tr>
       </thead>
       <tbody class="border border-slate-600">
@@ -27,10 +27,14 @@
             <% end %>
             <td class="border border-slate-600 text-center"><%= link_to "Github PR", status.github_pr_link, class: "hover:text-blue-500 underline md:decoration-solid" %></td>
             <td class="border border-slate-600 text-center"><%= status.date %></td>
-            <td class="border border-slate-600"><%= status.remarks %></td>
+            <td class="border border-slate-600">
+               <% status.remarks.last.each do |remark| %>
+                  <p>Remark: <%= remark.description %></p>
+               <% end %>
+            </td>
             <td class="text-center"><%= link_to '<i class="fa-solid fa-eye"></i>'.html_safe, status, class: "hover:text-blue-500 underline md:decoration-solid text-2xl" %></td>
             <% if admin? %>
-              <td><%= link_to 'Add remarks', edit_status_path(status), class: "hover:text-blue-500 underline md:decoration-solid" %></td>
+              <td><%= link_to '<i class="fa-solid fa-circle-plus"></i>'.html_safe, edit_status_path(status), class: "hover:text-blue-500 underline md:decoration-solid text-2xl" %></td>
             <% else %>
               <td class="text-center"><%= link_to '<i class="fa-solid fa-pen-to-square"></i>'.html_safe, edit_status_path(status), class: "hover:text-blue-500 underline md:decoration-solid text-2xl" %></td>
             <% end %>
